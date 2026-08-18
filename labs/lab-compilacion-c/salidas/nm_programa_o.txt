@@ -1,0 +1,17 @@
+0000000000000000 b .bss
+0000000000000000 d .data
+0000000000000000 p .pdata
+0000000000000000 r .rdata
+0000000000000000 r .rdata$zzz
+0000000000000000 t .text
+0000000000000000 r .xdata
+                 U __imp___acrt_iob_func
+                 U __main
+                 U __mingw_vfprintf
+                 U area_circulo
+                 U factorial
+0000000000000195 T imprimir_separador
+0000000000000000 B llamadas
+0000000000000074 T main
+0000000000000000 t printf
+0000000000000051 T sumar
