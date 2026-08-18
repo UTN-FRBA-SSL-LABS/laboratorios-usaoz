@@ -1,21 +1,5 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/2a4L9bD1)
 # Laboratorio: Git y GitHub
-
-## Verificación y calificación
-
-Desde la raíz del repositorio ejecutá:
-
-```bash
-make grade LAB=lab-github
-```
-
-Si ya estás dentro de esta carpeta también podés usar `make test`. Ambos
-comandos ejecutan los mismos checks y muestran el puntaje sin necesidad de hacer
-push. Algunos checks de PRs y reviews requieren `gh auth login`; el grading de
-GitHub Actions sí los ejecuta. La nota oficial queda en el resumen y en los
-artefactos de la ejecución.
-
-No modifiques `.github/`, `scripts/` ni `test_local.sh`: son infraestructura
-docente y el workflow restaura automáticamente su versión oficial.
 
 ## Antes de empezar
 
@@ -44,15 +28,14 @@ git --version
 
 ### Cloná el repositorio
 
-Cuando recibas la URL de tu repositorio personal, copiala desde el botón verde **Code → HTTPS** y ejecutá:
+Una vez que aceptaste el assignment en GitHub Classroom, GitHub crea una copia del repositorio para vos. Copiá la URL de tu repo (botón verde **Code → HTTPS**) y ejecutá:
 
 ```bash
 git clone <URL-de-tu-repo>
 cd <nombre-del-repo>
-cd labs/lab-github
 ```
 
-> El primer directorio es el nombre de tu repositorio personal. El laboratorio está dentro de `labs/lab-github/`.
+> El nombre del directorio clonado es el nombre de tu repo en GitHub Classroom (ej: `lab-github-juan-perez`), no necesariamente `lab-github`.
 
 Verificá el estado inicial:
 
@@ -92,7 +75,7 @@ Vas a ver que `multiplicar` devuelve 0 — eso es lo esperado, es lo que vas a i
 
 A lo largo del laboratorio vas a encontrar **7 preguntas de selección múltiple** (P1 a P7). Cada una tiene cuatro opciones: `a)`, `b)`, `c)` o `d)`.
 
-Para responder, **editá este archivo** (`README.md`) y escribí la letra elegida en el campo `RESPUESTA_PX=`, inmediatamente después del signo `=`.
+Para responder, **editá este archivo** (`readme.md`) y escribí la letra elegida en el campo `RESPUESTA_PX=`, inmediatamente después del signo `=`.
 
 **Ejemplo:** si la respuesta fuera la opción b), el campo debe quedar exactamente así:
 
@@ -301,10 +284,10 @@ b) Para poder trabajar en un cambio de forma aislada, sin afectar el código est
 
 c) Para que el historial de commits sea más corto y lineal
 
-d) Porque la plataforma lo requiere para poder crear el pull request
+d) Porque GitHub Classroom lo requiere para la corrección automática
 
 ```
-RESPUESTA_P1=
+RESPUESTA_P1=b
 ```
 
 ---
@@ -339,7 +322,6 @@ El **compañero** hace estos pasos:
 ```bash
 git clone <URL-del-repo-del-owner>
 cd <nombre-del-repo>
-cd labs/lab-github
 git switch -c sugerencia/<tu-nombre>
 ```
 
@@ -432,7 +414,7 @@ c) Hacer un rebase interactivo para reescribir el historial antes de responder a
 d) Pedirle al owner que mergee igual y hacer el fix en un PR separado
 
 ```
-RESPUESTA_P2=
+RESPUESTA_P2=b
 ```
 
 ---
@@ -513,7 +495,7 @@ c) Porque `git reset --hard` modifica el historial local, generando conflictos p
 d) Porque GitHub bloquea automáticamente los push después de un `git reset --hard`
 
 ```
-RESPUESTA_P3=
+RESPUESTA_P3=c
 ```
 
 ---
@@ -645,7 +627,7 @@ c) `(n & 1) == 0` no funciona con números negativos en ningún compilador C est
 d) No hay ninguna diferencia; el compilador genera exactamente el mismo código para ambas
 
 ```
-RESPUESTA_P4=
+RESPUESTA_P4=b
 ```
 
 ---
@@ -663,7 +645,7 @@ c) Si hay que revertir un cambio puntual es imposible sin deshacer todo lo del d
 d) Git rechaza commits que modifiquen demasiados archivos al mismo tiempo
 
 ```
-RESPUESTA_P5=
+RESPUESTA_P5=c
 ```
 
 ---
@@ -679,7 +661,7 @@ c) `git fetch` solo descarga la branch actual; `git pull` descarga todas las bra
 d) `git pull` siempre pide confirmación antes de modificar archivos locales; `git fetch` no
 
 ```
-RESPUESTA_P6=
+RESPUESTA_P6=b
 ```
 
 ---
@@ -695,7 +677,7 @@ c) Qué problema resuelve o qué funcionalidad agrega, cómo se verificó que fu
 d) El tiempo que tardó en implementarse y el nombre del autor
 
 ```
-RESPUESTA_P7=
+RESPUESTA_P7=c
 ```
 
 ---
@@ -746,9 +728,9 @@ Una vez autenticado con `gh auth login`, `make test` puede verificar el 100% de 
 
 **Flujo recomendado:** hacé commits frecuentes mientras avanzás, usá `make test` para verificar tu progreso, y dejá el push para cuando una parte esté realmente lista.
 
-### Integración continua
+### Corrección automática
 
-Cuando pusheás cambios dentro de `labs/lab-github/`, el workflow central del monorepo ejecuta los mismos checks y valida el puntaje mínimo.
+Cuando pusheás cambios en `operaciones.c` o `readme.md`, GitHub ejecuta el workflow de corrección que valida los mismos checks y calcula tu puntaje oficial.
 
 > ⚠️ **Evitá pushes innecesarios.** Cada ejecución consume cómputo en servidores de GitHub — un recurso compartido. `make test` te da el mismo resultado en tu terminal sin costo.
 
@@ -756,7 +738,7 @@ Para ver los resultados:
 
 1. Entrá a tu repositorio en GitHub
 2. Hacé click en la pestaña **Actions**
-3. Hacé click en la ejecución más reciente → job **Grading · lab-github**
+3. Hacé click en la ejecución más reciente → job **Autograding**
 4. Al final del job vas a ver la tabla con el resultado de cada check y el puntaje total
 
 También podés ver un resumen rápido: en la pestaña **Code**, junto a cada commit aparece un ícono ✅ (todos los checks pasaron) o ❌ (alguno falló). Hacé click en ese ícono para ver el detalle.

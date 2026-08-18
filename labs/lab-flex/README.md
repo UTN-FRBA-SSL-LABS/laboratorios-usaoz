@@ -1,21 +1,5 @@
 # Laboratorio: Introducción a Flex
 
-## Verificación y calificación
-
-Desde la raíz del repositorio ejecutá:
-
-```bash
-make grade LAB=lab-flex
-```
-
-Si ya estás dentro de esta carpeta también podés usar `make test`. Ambos
-comandos ejecutan los mismos checks y muestran el puntaje sin necesidad de hacer
-push. La verificación oficial se ejecuta cuando cambia `labs/lab-flex/`; la nota
-queda en el resumen y en los artefactos de GitHub Actions.
-
-No modifiques `.github/`, `scripts/` ni `test_local.sh`: son infraestructura
-docente y el workflow restaura automáticamente su versión oficial.
-
 ## Objetivo
 
 Familiarizarse con el uso de Flex para construir analizadores léxicos. A lo largo del laboratorio vas a trabajar con los conceptos centrales: `yytext`, la regla comodín, definiciones ERX, `yyleng`, variables globales, funciones de usuario y retorno de tokens.
@@ -58,9 +42,9 @@ make test
 
 **Flujo recomendado:** hacé commits frecuentes mientras avanzás, usá `make test` para verificar tu progreso, y dejá el push para cuando una parte esté realmente lista.
 
-### Integración continua
+### Corrección automática
 
-Cuando pusheás cambios dentro de `labs/lab-flex/`, el workflow central del monorepo ejecuta los mismos checks y valida el puntaje mínimo.
+Cuando pusheás cambios en archivos `.l` o `README.md`, GitHub ejecuta el workflow de corrección que valida los mismos checks y calcula tu puntaje oficial.
 
 > ⚠️ **Evitá pushes innecesarios.** Cada ejecución consume cómputo en servidores de GitHub — un recurso compartido. `make test` te da el mismo resultado en tu terminal sin costo.
 
@@ -68,7 +52,7 @@ Para ver los resultados:
 
 1. Entrá a tu repositorio en GitHub
 2. Hacé click en la pestaña **Actions**
-3. Hacé click en la ejecución más reciente → job **Grading · lab-flex**
+3. Hacé click en la ejecución más reciente → job **Autograding**
 4. Al final del job vas a ver la tabla con el resultado de cada check y el puntaje total
 
 ---
@@ -235,21 +219,21 @@ Respondé cada pregunta reemplazando el espacio en blanco con la opción correct
 Opciones: `ECHO` | `IGNORA` | `ERROR`
 
 ```
-P1=
+P1=ECHO
 ```
 
 **P2** — Cuando dos reglas coinciden con **exactamente la misma cantidad de caracteres**, ¿cuál elige Flex?
 Opciones: `LA_PRIMERA` | `LA_ULTIMA` | `ALEATORIA`
 
 ```
-P2=
+P2=LA_PRIMERA
 ```
 
 **P3** — ¿`yyleng` contiene la cantidad de caracteres del lexema reconocido por la regla actual?
 Opciones: `SI` | `NO`
 
 ```
-P3=
+P3=SI
 ```
 
 ---

@@ -2,34 +2,16 @@
 
 **Materia:** Sintaxis y Semántica de los Lenguajes (UTN-FRBA)
 
+
 **Tema:** Proceso de compilación: Del código fuente al ejecutable
-
----
-
-## Verificación y calificación
-
-Desde la raíz del repositorio ejecutá:
-
-```bash
-make grade LAB=lab-compilacion-c
-```
-
-Si ya estás dentro de esta carpeta también podés usar `make test`. Ambos
-comandos ejecutan los mismos checks y muestran el puntaje sin necesidad de hacer
-push. La verificación oficial se ejecuta cuando cambia
-`labs/lab-compilacion-c/`; la nota queda en el resumen y en los artefactos de
-GitHub Actions.
-
-No modifiques `.github/`, `scripts/` ni `test_local.sh`: son infraestructura
-docente y el workflow restaura automáticamente su versión oficial.
 
 ---
 
 ## Antes de empezar: ¿Cómo funciona este laboratorio?
 
-Este laboratorio se entrega a través de un repositorio personal creado en la organización de la materia con todos los archivos necesarios.
+Este laboratorio se entrega a través de **GitHub Classroom**. Al aceptar el assignment se te creó un repositorio personal en la organización de la materia con todos los archivos necesarios.
 
-**El flujo es simple**: trabajás en `main`, verificás localmente con `make test`, y cuando está listo hacés push. GitHub ejecuta el workflow central de CI y podés ver los resultados en la pestaña **Actions** de tu repositorio.
+**El flujo es simple**: trabajás en `main` y hacés push.** No hace falta crear ramas ni abrir Pull Requests manualmente, GitHub Classroom crea automáticamente una rama `feedback` y abre un PR en tu repositorio. Ahí es donde el docente revisa tu trabajo y donde ves los resultados de los tests.
 
 **Opciones para trabajar:**
 - **Local:** clonar el repositorio en tu máquina con `git clone` y trabajar con el editor que prefieras.
@@ -44,7 +26,6 @@ En la página de tu repositorio en GitHub, hacé clic en **"Code"** y copiá la 
 ```bash
 git clone <URL-de-tu-repositorio>
 cd <nombre-de-la-carpeta>
-cd labs/lab-compilacion-c
 ```
 
 Verificar que están los archivos:
@@ -58,7 +39,7 @@ ls
 
 #### Paso 2: Ejecutar cada etapa del laboratorio
 
-Seguir la guía del laboratorio ejecutando los comandos de cada etapa. Algunos resultados hay que guardarlos en archivos para que el verificador pueda revisarlos. Antes de guardar las salidas, crear la carpeta donde van a estar:
+Seguir la guía del laboratorio ejecutando los comandos de cada etapa. Algunos resultados hay que guardarlos en archivos para que el autograding pueda verificarlos. Antes de guardar las salidas, crear la carpeta donde van a estar:
 
 ```bash
 mkdir salidas
@@ -76,19 +57,7 @@ nm programa   > salidas/nm_ejecutable.txt        # guarda la tabla de símbolos 
 
 Abrí el archivo con cualquier editor y respondé cada pregunta en el lugar indicado, con la salida real de los comandos que ejecutaste.
 
-#### Paso 4: Verificar localmente y hacer push
-
-Antes de pushear, verificá tu puntaje con:
-
-```bash
-make test
-```
-
-**Flujo recomendado:** hacé commits frecuentes mientras avanzás, usá `make test` para verificar tu progreso, y dejá el push para cuando una parte esté realmente lista.
-
-Cuando estés listo/a, commiteá y pusheá:
-
-#### Paso 4b: Commitear y hacer push
+#### Paso 4: Commitear y hacer push
 
 Verificar qué archivos están listos para commitear:
 
@@ -112,17 +81,14 @@ git log --oneline
 
 > **`programa.o` y los ejecutables no deben aparecer en `git status`.** Si aparecen, el `.gitignore` no está funcionando, no usar `git add .`, agregar cada archivo por nombre.
 
-#### Paso 5: Ver resultados en GitHub
+#### Paso 5: Revisar el Pull Request de feedback
 
-Una vez que hiciste push, entrá a tu repositorio en GitHub:
+Una vez que hiciste push, entrá a tu repositorio en GitHub. Ya va a haber un Pull Request abierto llamado **"Feedback"**. Ahí podés ver:
 
-1. Hacé click en la pestaña **Actions**
-2. Hacé click en la ejecución más reciente → job **Grading · lab-compilacion-c**
-3. Al final del job vas a ver la tabla con el resultado de cada check y el puntaje total
+- Los **checks automáticos** en la pestaña "Checks": ✅ pasó / ❌ falló.
+- Los **comentarios del docente** sobre tus respuestas abiertas.
 
-Si algún check falla, corregí el problema, commiteá y volvé a pushear: el workflow se re-ejecuta solo.
-
-> ⚠️ **Evitá pushes innecesarios.** Cada ejecución consume cómputo en servidores de GitHub — un recurso compartido. El workflow selecciona este laboratorio cuando cambia algún archivo dentro de `labs/lab-compilacion-c/`. Para el resto, `make test` te da el mismo resultado en tu terminal sin costo.
+Si algún check falla, corregí el problema, commitá el archivo y hacé push nuevamente — los checks se re-ejecutan solos.
 
 ---
 
@@ -133,7 +99,7 @@ Los checks son de dos tipos:
 **Sobre las respuestas en este archivo:**
 
 - Las **respuestas cerradas** (`CLAVE=valor`) se verifican automáticamente con cada push. Deben escribirse exactamente como se indica: sin espacios, sin comillas, respetando mayúsculas.
-- Las **respuestas abiertas** (`> **R:**`) no se evalúan automáticamente. Escribilas con tus propias palabras — el docente las revisa manualmente.
+- Las **respuestas abiertas** (`> **R:**`) **no se evalúan automáticamente**. Las lee el docente en el Pull Request de feedback y puede dejar comentarios sobre ellas. Escribilas con tus propias palabras.
 
 ---
 
@@ -370,11 +336,11 @@ Todos son correctos. Lo importante no es el número exacto sino que sea **varios
 **P1.** Ejecutá `wc -l programa.i` y escribí el número de líneas que obtenés.
 
 <!-- Completá la línea siguiente con el número exacto (solo dígitos, sin espacios): -->
-LINEAS_I=
+LINEAS_I=1753
 
 ¿Por qué ese número es tan mayor que las 94 líneas de `programa.c`?
 
-> **R:**
+> **R:** Porque los #include hacen que se agreguen los contenidos de las distintas librerias que se ponen despues del include, trayendo muchas funciones, datos y otras cosas que la libreria contiene.
 
 ---
 
@@ -413,11 +379,11 @@ grep "Archivo fuente principal" programa.i   # no debe encontrar nada
 ¿El comando encuentra algo o no devuelve nada?
 
 <!-- Completá con SI (si encontró algo) o NO (si no encontró nada): -->
-COMENTARIOS_EN_I=
+COMENTARIOS_EN_I=NO
 
 ¿Por qué ocurre eso?
 
-> **R:**
+> **R:** Porque el preprocesador borra todos los comentarios, por eso no se puede encontrar ningun comentario en programa.i
 
 ---
 
@@ -446,24 +412,24 @@ Nótese que `CUADRADO(5)` se expande a `((5) * (5))`, con los paréntesis extra 
 
 **P3.** Ejecutá `grep -n "CUADRADO" programa.i` y copiá la salida completa.
 
-> **R:**
+> **R:** 1722:    printf("CUADRADO(%d)      = %d\n", 5, ((5) * (5)));
 
 ¿El nombre `CUADRADO` aparece tal cual en `programa.i`, o fue reemplazado
 por otra cosa? Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-CUADRADO_EN_I=
+CUADRADO_EN_I=NO
 
 ---
 
 **P4.** Ejecutá `grep -n '"1\.0"' programa.i` y copiá la línea encontrada.
 
-> **R:**
+> **R:** 1713:    printf("=== Laboratorio de Compilacion en C (v%s) ===\n\n", "1.0");
 
 ¿Cuál era el nombre de la macro en `programa.c` que fue reemplazada por `"1.0"`?
 
 <!-- Completá con el nombre exacto de la macro (en mayúsculas, como está en el fuente): -->
-NOMBRE_MACRO_VERSION=
+NOMBRE_MACRO_VERSION=VERSION
 
 ---
 
@@ -499,13 +465,13 @@ gcc -E programa.c | grep "Iniciando"
 gcc -E -DDEBUG programa.c | grep "Iniciando"
 ```
 
-> **R:**
+> **R:** El primer no dió salida pero el sedungod si: printf("[DEBUG] %s\n", ("Iniciando main"));
 
 ¿Agregar `-DDEBUG` hace que aparezca código nuevo en el `.i` que antes no estaba?
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-DEBUG_ACTIVA_CODIGO=
+DEBUG_ACTIVA_CODIGO=SI
 
 ---
 
@@ -528,7 +494,7 @@ grep -n "stdio.h" programa.i | head -5
 
 ¿Qué información comunican esas líneas `# N "archivo"`? ¿De qué archivo proviene el bloque que contiene la declaración de `printf`?
 
-> **R:**
+> **R:** Comunican de que archivo y que linea de tal archivo viene el codigo. "C:/TDM-GCC-64/x86_64-w64-mingw32/include/stdio.h" , del stdio.h
 
 ---
 
@@ -684,26 +650,31 @@ Aparecen como instrucciones de llamada (por ejemplo `bl _area_circulo`), pero **
 
 **P7.** Ejecutá `grep "area_circulo" programa.s` y copiá la salida.
 
-> **R:**
+> **R:** .ascii "area_circulo(%.1f) = %.4f\12\0" 
+> call    area_circulo
+> .def    area_circulo;   .scl    2;      .type   32;     .endef
 
 ¿`area_circulo` aparece como una función *definida* en `programa.s`
 (con su propio bloque de instrucciones) o solo como una *llamada* (instrucción sin cuerpo)?
 Respondé DEFINIDA o LLAMADA:
 
 <!-- Completá con DEFINIDA o LLAMADA: -->
-AREA_EN_S=
+AREA_EN_S=LLAMADA
 
 ---
 
 **P8.** Encontrá en `programa.s` la etiqueta `sumar:` o `_sumar:` y copiá
 las primeras 4 líneas de instrucciones que le siguen.
 
-> **R:**
+> **R:**pushq	%rbp 
+> .seh_pushreg	%rbp
+>  movq	%rsp, %rbp 
+> .seh_setframe	%rbp, 0
 
 Explicá en términos generales qué hacen esas instrucciones
 (usá los comentarios del laboratorio como guía):
 
-> **R:**
+> **R:** Son el "prologo" de la funcion, el pushq y el movq manejan la memoria y los seh manejan posibles errores
 
 ---
 
@@ -716,13 +687,17 @@ grep "llamadas" programa.s
 
 **P9.** Ejecutá `grep "llamadas" programa.s` y copiá la salida.
 
-> **R:**
+> **R:**         .globl  llamadas
+> llamadas:
+>   movl    llamadas(%rip), %eax
+>   movl    %eax, llamadas(%rip)
+>   movl    llamadas(%rip), %eax
 
 ¿Aparece la variable `llamadas` en el ensamblador?
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-LLAMADAS_EN_S=
+LLAMADAS_EN_S=SI
 
 ---
 
@@ -826,13 +801,29 @@ Salida esperada (simplificada):
 
 **P10.** Ejecutá `nm programa.o` y copiá la salida completa.
 
-> **R:**
+> **R:** 0000000000000000 b .bss
+> 0000000000000000 d .data
+> 0000000000000000 p .pdata
+> 0000000000000000 r .rdata
+> 0000000000000000 r .rdata$zzz
+> 0000000000000000 t .text
+> 0000000000000000 r .xdata
+>                  U __imp___acrt_iob_func
+>                  U __main
+>                  U __mingw_vfprintf
+>                  U area_circulo
+>                  U factorial
+> 0000000000000195 T imprimir_separador
+> 0000000000000000 B llamadas
+> 0000000000000074 T main
+> 0000000000000000 t printf
+> 0000000000000051 T sumar
 
 ¿Con qué letra aparece `area_circulo` en esa tabla?
 Escribí solo la letra (una mayúscula):
 
 <!-- Completá con la letra exacta que muestra nm (U, T, D, etc.): -->
-TIPO_AREA_EN_O=
+TIPO_AREA_EN_O=U
 
 ---
 
@@ -852,13 +843,13 @@ nm matematica.o
 **P11.** ¿Por qué `area_circulo` tiene ese tipo en `programa.o`
 pero tipo `T` en `matematica.o`?
 
-> **R:**
+> **R:** Porque en programa.c solo se llama a indefinida mientras que en matematica.c esta escrito el codigo
 
 ¿Qué etapa del proceso de compilación resuelve esa diferencia?
 Respondé con una palabra: PREPROCESAMIENTO, COMPILACION, ENSAMBLADO o ENLAZADO:
 
 <!-- Completá con una de las cuatro opciones: -->
-ETAPA_QUE_RESUELVE=
+ETAPA_QUE_RESUELVE=ENLAZADO
 
 ---
 
@@ -877,13 +868,13 @@ Un `.o` no es ejecutable por dos razones:
 
 **P12.** Intentá ejecutar `./programa.o` directamente. ¿Qué mensaje aparece?
 
-> **R:**
+> **R:** bash: ./programa.o: cannot execute binary file: Exec format error
 
 ¿Se puede ejecutar un archivo `.o` directamente?
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-EJECUTABLE_O=
+EJECUTABLE_O=NO
 
 ---
 
@@ -972,13 +963,13 @@ nm programa | grep area_circulo
 **P13.** Enlazá con `gcc programa.o matematica.o -o programa`.
 Ejecutá `nm programa | grep "area_circulo"` y copiá la salida.
 
-> **R:**
+> **R:** 00000001400016f0 T area_circulo
 
 ¿Con qué letra aparece ahora `area_circulo` en el ejecutable final?
 Escribí solo la letra:
 
 <!-- Completá con la letra exacta que muestra nm: -->
-TIPO_AREA_ENLAZADO=
+TIPO_AREA_ENLAZADO=T
 
 ---
 
@@ -994,17 +985,17 @@ Quedan algunos `U` incluso en el ejecutable final. ¿Por qué? Son funciones de 
 
 **P14.** Ejecutá `nm programa | grep "^ *U"` y copiá la salida.
 
-> **R:**
+> **R:** U __end__
 
 ¿Quedan símbolos de tipo `U` en el ejecutable final?
 Respondé SI o NO:
 
 <!-- Completá con SI o NO: -->
-SIMBOLOS_U_FINAL=
+SIMBOLOS_U_FINAL=SI
 
 ¿Por qué quedan? ¿Quién los resuelve y cuándo?
 
-> **R:**
+> **R:** Los que quedan solo son los de las bibliotecas dinamicas del sistema, sistema operativo se encarga de ellos cuando se vaya a ejecutar el programa
 
 ---
 
@@ -1018,12 +1009,25 @@ SIMBOLOS_U_FINAL=
 
 **P15.** Ejecutá `./programa` y copiá la salida completa.
 
-> **R:**
+> **R:** === Laboratorio de Compilacion en C (v1.0) ===
+> sumar(3, 4)       = 7
+> CUADRADO(5)      = 25
+> MAX(7, 12)        = 12
+> ----------------------------------------
+> area_circulo(5.0) = 78.5398
+> Factoriales:
+>   0! = 1
+>   1! = 1
+>   2! = 2
+>   3! = 6
+>   4! = 24  5! = 120
+> ----------------------------------------
+> Llamadas a sumar(): 1
 
 ¿Qué valor da `factorial(5)`? Escribí solo el número:
 
 <!-- Completá con el número exacto: -->
-FACTORIAL_5=
+FACTORIAL_5=120
 
 ---
 
@@ -1035,14 +1039,14 @@ FACTORIAL_5=
 como `CUADRADO(x)` y una **función real** como `sumar(a, b)`.
 ¿En qué etapa "desaparece" cada una? ¿Cuál tiene verificación de tipos?
 
-> **R:**
+> **R:** La macro busca y reemplaza texto pero no tiene verificacion de tipos, y "desaparece" en el preprocesador, la funcion es codigoq ue se arma en la compilacion y tiene chequeo de tipos, y esta "desaparece" cuando su codigo se traduce a assembly en la compilacion
 
 ---
 
 **P17.** ¿Qué diferencia hay entre un símbolo de tipo `T` y uno de tipo `D`
 en la salida de `nm`? ¿En qué sección del archivo objeto vive cada uno?
 
-> **R:**
+> **R:** La T son las funciones y esta en .text mientras uqe la D son las variables y se encuentran en .data
 
 ---
 
@@ -1053,7 +1057,7 @@ y copiá la salida.
 
 ¿Por qué `libc` no hubo que especificarla explícitamente al enlazar con `gcc`?
 
-> **R:**
+> **R:** Porque al ser comun entre muchos programas gcc la trae por defecto
 
 ---
 
